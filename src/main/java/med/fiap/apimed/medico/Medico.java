@@ -6,7 +6,6 @@ import med.fiap.apimed.endereco.Endereco;
 
 @Table(name = "medicos")
 @Entity(name = "Medico")
-@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
@@ -19,6 +18,34 @@ public class Medico {
     private String email;
     private String telefone;
     private String crm;
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public String getCrm() {
+        return crm;
+    }
+
+    public Especialidade getEspecialidade() {
+        return especialidade;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
 
     @Enumerated(EnumType.STRING)
     private Especialidade especialidade;
@@ -34,4 +61,6 @@ public class Medico {
         this.especialidade = dados.especialidade();
         this.endereco = new Endereco(dados.endereco());
     }
+
+
 }
