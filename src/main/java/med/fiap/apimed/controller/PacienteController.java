@@ -1,11 +1,26 @@
 package med.fiap.apimed.controller;
 
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import med.fiap.apimed.paciente.DadosCadastroPaciente;
+import med.fiap.apimed.paciente.Paciente;
+import med.fiap.apimed.paciente.PacienteRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
+@RequestMapping("pacientes")
 public class PacienteController {
 
-    public void cadastrar(@RequestBody DadosCadastroPaciente dados) {
-        System.out.println(dados);
+    @Autowired
+    private PacienteRepository repository;
+
+    @PostMapping
+    @Transactional
+    public void cadastrar(@RequestBody @Valid DadosCadastroPaciente dados) {
+        repository.save(new Paciente(dados));
     }
 }
